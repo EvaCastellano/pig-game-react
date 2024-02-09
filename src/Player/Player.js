@@ -3,7 +3,7 @@ import './Player.css'
 function Player({ name, score, current, isActive }) {// =   const {n,s,etc} = props
 
   const classPlayer = isActive
-    ? score > 100
+    ? score >= 100
       ? 'player player--winner'
       : 'player player--active'
     : 'player'
@@ -14,7 +14,7 @@ function Player({ name, score, current, isActive }) {// =   const {n,s,etc} = pr
       <p className="score">{score}</p>
       <div className="current">
         <p className="current-label">Current</p>
-        <p className="current-score">{current}</p>
+        <p className="current-score">{current || 0}</p>
       </div>
     </section>
   )
