@@ -1,5 +1,5 @@
 import './App.css'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Player from './Player/Player.js'
 
 function App() {
@@ -8,22 +8,21 @@ function App() {
   const [current, setCurrent] = useState(0)
   const [score, setScore] = useState([0, 0])
 
-  const handleNew = () => {
-    setActivePlayer(1)
-    setCurrent(0)
-    setScore([0, 0])
-    setDiceNumber(0)
-  }
-
   const handleHold = () => {
     const newScore = [...score]
-    newScore[activePlayer - 1] = current
+    newScore[activePlayer - 1] += current
     setScore(newScore)
     setActivePlayer(activePlayer === 1 ? 2 : 1)
     setCurrent(0)
   }
 
-  const handleDice = () => {
+  const handleNewGame = () => {
+    setActivePlayer(1)
+    setCurrent(0)
+    setScore([0, 0])
+    setDiceNumber(0)
+  }
+  const handleRollDice = () => {
     setDiceNumber(Math.floor(Math.random() * 6) + 1)
   }
 
@@ -35,6 +34,7 @@ function App() {
       setCurrent((current) => current + diceNumber)
     }
   }, [diceNumber])
+
   return (
     <main>
       <Player
@@ -56,14 +56,14 @@ function App() {
           className="dice"
         />
       )}
-      <button className="btn btn--new" onClick={handleNew}>
-        :arrows_counterclockwise: New game
+      <button className="btn btn--new" onClick={handleNewGame}>
+        🔄 New game
       </button>
-      <button className="btn btn--roll" onClick={handleDice}>
-        :game_die: Roll dice
+      <button className="btn btn--roll" onClick={handleRollDice}>
+        🎲 Roll dice
       </button>
       <button className="btn btn--hold" onClick={handleHold}>
-        :inbox_tray: Hold
+        📥 Hold
       </button>
     </main>
   )
