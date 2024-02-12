@@ -3,7 +3,7 @@ import './Player.css'
 function Player({ name, score, current, isActive }) {// =   const {n,s,etc} = props
 
   const classPlayer =
-    score > 10
+    score >= 100
       ? 'player player--winner'
       : isActive
       ? 'player player--active'

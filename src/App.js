@@ -22,6 +22,7 @@ function App() {
     setScore([0, 0])
     setDiceNumber(0)
   }
+
   const handleRollDice = () => {
     setDiceNumber(Math.floor(Math.random() * 6) + 1)
   }
@@ -34,6 +35,8 @@ function App() {
       setCurrent((current) => current + diceNumber)
     }
   }, [diceNumber])
+
+  const finishedPlaying = Math.max(...score) >= 100 ? true : false
 
   return (
     <main>
@@ -59,10 +62,18 @@ function App() {
       <button className="btn btn--new" onClick={handleNewGame}>
         🔄 New game
       </button>
-      <button className="btn btn--roll" onClick={handleRollDice}>
+      <button
+        className="btn btn--roll"
+        onClick={handleRollDice}
+        disabled={finishedPlaying}
+      >
         🎲 Roll dice
       </button>
-      <button className="btn btn--hold" onClick={handleHold}>
+      <button
+        className="btn btn--hold"
+        onClick={handleHold}
+        disabled={finishedPlaying}
+      >
         📥 Hold
       </button>
     </main>
@@ -76,7 +87,5 @@ export default App
 // 4. manejar los eventos de click en los botones de New game, Roll dice y Hold
 // 5. manejar el cambio de imagen de dado cuando se hace click en el botón rolldice
 // 5. manejar el cambio de jugador activo cuando se hace click en el botón Hold
-//TODO: 6. manejar el cambio de jugador activo cuando se obtiene un 1 al hacer click en el botón Roll dice
-//TODO: 7. manejar el cambio de jugador activo cuando se obtiene un 6 al hacer click en el botón Roll dice
-//TODO: 8. manejar el cambio de jugador activo cuando se obtiene un número diferente de 1 o 6 al hacer click en el botón Roll dice
-//TODO: 9. manejar el cambio de jugador activo cuando se hace click en el botón New game
+// 6. manejar el cambio de jugador activo cuando se obtiene un 1 al hacer click en el botón Roll dice
+// 7. manejar el cambio de jugador activo cuando se hace click en el botón New game
